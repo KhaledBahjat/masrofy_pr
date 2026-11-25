@@ -1,10 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/constants.dart';
-import 'package:masrofy/core/mock_data.dart';
 import 'package:masrofy/core/routes.dart';
 import 'package:masrofy/core/utills/custom_app_bar.dart';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TransactionView extends StatefulWidget {
   const TransactionView({super.key});
@@ -22,55 +21,55 @@ class _TransactionViewState extends State<TransactionView> {
   String selectedRepetition = "One time";
   DateTime? selectedDate;
 
-  void _saveTransaction() {
-    final amount = double.tryParse(amountController.text.trim());
-    if (amount == null || amount <= 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a valid amount'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-    if (selectedCategory == "Select category") {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please select a category'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-    if (selectedDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please choose a date'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
+  // void _saveTransaction() {
+  //   final amount = double.tryParse(amountController.text.trim());
+  //   if (amount == null || amount <= 0) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Please enter a valid amount'),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
+  //   if (selectedCategory == "Select category") {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Please select a category'),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
+  //   if (selectedDate == null) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Please choose a date'),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
 
-    MockStore.instance.addTransaction(
-      amount: amount,
-      description: descriptionController.text.trim(),
-      category: selectedCategory,
-      currency: selectedCurrency,
-      transactionType: transactionType,
-      repetition: selectedRepetition,
-      date: selectedDate!,
-    );
+  //   MockStore.instance.addTransaction(
+  //     amount: amount,
+  //     description: descriptionController.text.trim(),
+  //     category: selectedCategory,
+  //     currency: selectedCurrency,
+  //     transactionType: transactionType,
+  //     repetition: selectedRepetition,
+  //     date: selectedDate!,
+  //   );
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Transaction added successfully!'),
-        backgroundColor: Colors.green,
-      ),
-    );
-    amountController.clear();
-    descriptionController.clear();
-  }
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text('Transaction added successfully!'),
+  //       backgroundColor: Colors.green,
+  //     ),
+  //   );
+  //   amountController.clear();
+  //   descriptionController.clear();
+  // }
 
   @override
   void dispose() {
@@ -235,7 +234,7 @@ class _TransactionViewState extends State<TransactionView> {
 
             // ---------------- CATEGORY ----------------
             DropdownButtonFormField<String>(
-              value: selectedCategory,
+              initialValue: selectedCategory,
               dropdownColor: kPrimaryColor,
               style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
@@ -377,7 +376,7 @@ class _TransactionViewState extends State<TransactionView> {
 
             // ---------------- REPETITION ----------------
             DropdownButtonFormField<String>(
-              value: selectedRepetition,
+              initialValue: selectedRepetition,
               dropdownColor: kPrimaryColor,
               items: const [
                 DropdownMenuItem(value: "One time", child: Text("One time")),
@@ -392,9 +391,10 @@ class _TransactionViewState extends State<TransactionView> {
             // ---------------- BUTTONS ----------------
             Row(
               children: [
+                // Save Button
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: _saveTransaction,
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -426,6 +426,7 @@ class _TransactionViewState extends State<TransactionView> {
                   ),
                 ),
                 SizedBox(width: 10),
+                // Cancele Button
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () => (context).go(AppRoutes.kHomeView),

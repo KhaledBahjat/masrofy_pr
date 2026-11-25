@@ -1,6 +1,4 @@
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/constants.dart';
 import 'package:masrofy/core/mock_data.dart';
@@ -16,176 +14,172 @@ class HomeView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
+
     const user = MockData.currentUser;
-    final store = MockStore.instance;
+
+    final totalIncome = MockData.totalIncome;
+    final totalOutcome = MockData.totalOutcome;
+    final balance = MockData.balance;
 
     return Scaffold(
       body: SafeArea(
-        child: ListenableBuilder(
-          listenable: store,
-          builder: (context, _) {
-            final totalIncome = store.totalIncome;
-            final totalOutcome = store.totalOutcome;
-            final balance = store.balance;
-
-            return SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.05,
-                vertical: height * 0.02,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.05,
+            vertical: height * 0.02,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// ---------------------- USER HEADER ----------------------
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  /// ---------------------- USER HEADER ----------------------
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage(user.avatarAsset),
+                      ),
+                      SizedBox(width: width * 0.03),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundImage: AssetImage(user.avatarAsset),
+                          const Text(
+                            "Welcome back!",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
                           ),
-                          SizedBox(width: width * 0.03),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Welcome back!",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              Text(
-                                user.displayName,
-                                style: TextStyle(
-                                  fontSize: width * 0.05,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            user.displayName,
+                            style: TextStyle(
+                              fontSize: width * 0.05,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
                           ),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () => context.push(AppRoutes.kNotificationView),
-                        icon: const Icon(
-                          Icons.notifications,
-                          color: Colors.grey,
-                        ),
-                      ),
                     ],
                   ),
-
-                  SizedBox(height: height * 0.015),
-
-                  /// ---------------------- BALANCE CARD ----------------------
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(width * 0.038),
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/balance.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Total Balance",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 13,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "£${balance.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "From: £${totalIncome.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        LinearProgressIndicator(
-                          value: totalIncome == 0
-                              ? 0
-                              : (balance / totalIncome).clamp(0.0, 1.0),
-                          color: const Color.fromARGB(255, 134, 88, 72),
-                          backgroundColor: Colors.white24,
-                          minHeight: 6,
-                        ),
-                      ],
+                  IconButton(
+                    onPressed: () =>
+                        context.push(AppRoutes.kNotificationView),
+                    icon: const Icon(
+                      Icons.notifications,
+                      color: Colors.grey,
                     ),
                   ),
-
-                  SizedBox(height: height * 0.012),
-
-                  /// ---------------------- INCOME / OUTCOME ----------------------
-                  Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      border: const Border(
-                        right: BorderSide(
-                          color: kGreyFontColor,
-                          width: 4,
-                        ),
-                      ),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: _statCard(
-                            "Income",
-                            "£${totalIncome.toStringAsFixed(2)}",
-                            Colors.green,
-                          ),
-                        ),
-                        const VerticalDivider(
-                          color: Colors.white,
-                          thickness: 1,
-                          endIndent: 20,
-                          indent: 20,
-                        ),
-                        Expanded(
-                          child: _statCard(
-                            "Outcome",
-                            "£${totalOutcome.toStringAsFixed(2)}",
-                            Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: height * 0.012),
-
-                  /// ---------------------- SMART ALERTS ----------------------
-                  SmartAlert(width: width),
-
-                  SizedBox(height: height * 0.02),
-
-                  /// ---------------------- PIE CHART ----------------------
-                  OutcomePieAndStatistics(height: height, userId: user.uid),
                 ],
               ),
-            );
-          },
+
+              SizedBox(height: height * 0.015),
+
+              /// ---------------------- BALANCE CARD ----------------------
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(width * 0.038),
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/balance.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Total Balance",
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      "£${balance.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "From: £${totalIncome.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const LinearProgressIndicator(
+                      value: 0.45,
+                      color: Color.fromARGB(255, 134, 88, 72),
+                      backgroundColor: Colors.white24,
+                      minHeight: 6,
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: height * 0.012),
+
+              /// ---------------------- INCOME / OUTCOME ----------------------
+              Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: const Border(
+                    right: BorderSide(
+                      color: kGreyFontColor,
+                      width: 4,
+                    ),
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _statCard(
+                        "Income",
+                        "£${totalIncome.toStringAsFixed(2)}",
+                        Colors.green,
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: Colors.white,
+                      thickness: 1,
+                      endIndent: 20,
+                      indent: 20,
+                    ),
+                    Expanded(
+                      child: _statCard(
+                        "Outcome",
+                        "£${totalOutcome.toStringAsFixed(2)}",
+                        Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: height * 0.012),
+
+              /// ---------------------- SMART ALERTS ----------------------
+              SmartAlert(width: width),
+
+              SizedBox(height: height * 0.02),
+
+              /// ---------------------- PIE CHART ----------------------
+              OutcomePieAndStatistics(
+                height: height,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -209,7 +203,10 @@ class HomeView extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+              ),
             ),
             Text(
               value,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/routes.dart';
 import 'package:masrofy/screens/onboarding/model/onboarding_model.dart';
@@ -119,7 +119,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                               borderRadius: BorderRadius.circular(40),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
+                                  color: Colors.black.withValues(alpha: 0.08),
                                   blurRadius: 80,
                                   spreadRadius: 4,
                                   offset: const Offset(0, 20),
@@ -207,7 +207,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withValues(alpha: 0.08),
                           blurRadius: 20,
                           offset: const Offset(0, 8),
                         ),

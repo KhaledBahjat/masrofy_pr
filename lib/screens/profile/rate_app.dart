@@ -1,9 +1,8 @@
 // lib/screens/rate_app/view/rate_app_screen.dart
-import 'package:flutter/widgets.dart';
 import 'package:masrofy/core/constants.dart';
 
 import 'package:masrofy/screens/profile/custom_profile_back_buton.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RateAppScreen extends StatelessWidget {
   const RateAppScreen({super.key});

@@ -1,71 +1,33 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:masrofy/core/mock_data.dart';
 import 'package:masrofy/screens/home/view/widgets/legend_item.dart';
 import 'package:masrofy/screens/home/view/widgets/pie_section.dart';
-import 'package:masrofy/screens/transaction/model.dart';
 
 class OutcomePieAndStatistics extends StatelessWidget {
   final double height;
-  final String userId;
 
   const OutcomePieAndStatistics({
     super.key,
     required this.height,
-    required this.userId,
   });
 
   @override
   Widget build(BuildContext context) {
-    final store = MockStore.instance;
-    return ListenableBuilder(
-      listenable: store,
-      builder: (context, _) {
-        final transactions = store.transactions;
+    final statistics = MockData.outcomeStatistics;
 
-        if (transactions.isEmpty) {
-          return _emptyUI();
-        }
-
-        return _buildChartUI(transactions);
-      },
-    );
-  }
-
-  Widget _emptyUI() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: const Text(
-        "No transactions found",
-        style: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-    );
-  }
-
-  Widget _buildChartUI(List<TransactionModel> transactions) {
-    final expenses = transactions.where((t) => t.transactionType == "expense");
-    double total = expenses.fold(0, (sum, t) => sum + t.amount);
-
-    if (total == 0) {
+    if (statistics.isEmpty) {
       return _emptyUI();
     }
-
-    Map<String, double> sums = {};
-    for (var t in expenses) {
-      sums[t.category] = (sums[t.category] ?? 0) + t.amount;
-    }
-
-    Map<String, double> ratios = {};
-    sums.forEach((cat, amount) {
-      ratios[cat] = (amount / total) * 100;
-    });
 
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: const DecorationImage(
-          image: AssetImage('assets/images/Merchandise Category.png'),
+          image: AssetImage(
+            'assets/images/Merchandise Category.png',
+          ),
           fit: BoxFit.cover,
         ),
       ),
@@ -80,7 +42,9 @@ class OutcomePieAndStatistics extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+
           const SizedBox(height: 4),
+
           const Text(
             "In last 10 days",
             style: TextStyle(
@@ -98,26 +62,39 @@ class OutcomePieAndStatistics extends StatelessWidget {
               PieChartData(
                 centerSpaceRadius: 40,
                 sectionsSpace: 3,
-                sections: ratios.entries.map((e) {
-                  return pieSection(
-                    e.value,
-                    CategoryColors.getColor(e.key),
-                  );
-                }).toList(),
+                sections: [
+                  for (final item in statistics)
+                    pieSection(
+                      item.percentage,
+                      CategoryColors.getColor(item.category),
+                    ),
+                ],
               ),
             ),
           ),
 
           SizedBox(height: height * 0.02),
 
-          ...ratios.entries.map((e) {
-            return LegendItem(
-              title: e.key,
-              percent: "${e.value.toStringAsFixed(1)}%",
-              color: CategoryColors.getColor(e.key),
-            );
-          }),
+          for (final item in statistics)
+            LegendItem(
+              title: item.category,
+              percent: '${item.percentage.toStringAsFixed(1)}%',
+              color: CategoryColors.getColor(item.category),
+            ),
         ],
+      ),
+    );
+  }
+
+  Widget _emptyUI() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: const Text(
+        "No transactions found",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
       ),
     );
   }
@@ -139,5 +116,7 @@ class CategoryColors {
     "Monthly income": Colors.lightGreenAccent,
   };
 
-  static Color getColor(String cat) => colors[cat] ?? Colors.grey;
+  static Color getColor(String cat) {
+    return colors[cat] ?? Colors.grey;
+  }
 }

@@ -1,6 +1,6 @@
 
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const kPrimaryColor=Color(0xFFD7D6D6);
 const kPrimaryFont='kPoppins';

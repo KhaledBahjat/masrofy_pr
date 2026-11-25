@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:masrofy/screens/profile/about_app.dart';
+import 'package:masrofy/screens/profile/assistance.dart';
+import 'package:masrofy/screens/profile/rate_app.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/constants.dart';
 import 'package:masrofy/core/mock_data.dart';
 import 'package:masrofy/core/routes.dart';
 import 'package:masrofy/core/utills/custom_app_bar.dart';
-import 'package:masrofy/screens/profile/about_app.dart';
-import 'package:masrofy/screens/profile/assistance.dart';
-import 'package:masrofy/screens/profile/rate_app.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -74,7 +74,9 @@ class ProfileView extends StatelessWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Profile editing is disabled in UI demo mode'),
+                          content: Text(
+                            'Profile editing is disabled in UI demo mode',
+                          ),
                         ),
                       );
                     },
@@ -92,9 +94,7 @@ class ProfileView extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => AssistanceScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => AssistanceScreen()),
                 );
               },
             ),

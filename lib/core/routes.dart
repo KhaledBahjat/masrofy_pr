@@ -11,7 +11,7 @@ import 'package:masrofy/screens/transaction/view/transaction_view.dart';
 import 'package:masrofy/screens/onboarding/view/onboarding_screen.dart';
 import 'package:masrofy/screens/onboarding/view/splash_screen.dart';
 import 'package:masrofy/screens/onboarding/view/welcome_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class AppRoutes {
   static const kSplashView = '/';

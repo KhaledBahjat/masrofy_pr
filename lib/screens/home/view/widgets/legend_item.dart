@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LegendItem extends StatelessWidget {
   const LegendItem({super.key, required this.title, required this.percent, required this.color});

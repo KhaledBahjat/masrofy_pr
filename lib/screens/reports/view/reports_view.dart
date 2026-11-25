@@ -1,7 +1,5 @@
-
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:masrofy/core/constants.dart';
-import 'package:masrofy/core/mock_data.dart';
 import 'package:masrofy/core/utills/custom_app_bar.dart';
 import 'package:masrofy/screens/home/view/widgets/in_pie_and_statistics.dart';
 import 'package:masrofy/screens/home/view/widgets/out_pie_and_statistics.dart';
@@ -14,15 +12,18 @@ class AnalyticsAndReportsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    String userId = MockData.currentUser.uid;
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
         elevation: 0,
-        title: CustomAppBar(width: width, text: 'Analytics'),
+        title: CustomAppBar(
+          width: width,
+          text: 'Analytics',
+        ),
       ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
@@ -32,11 +33,24 @@ class AnalyticsAndReportsView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IncomePieAndStatistics(height: height, userId: userId),
+              // INCOME STATISTICS
+              IncomePieAndStatistics(
+                height: height,
+              ),
+
               SizedBox(height: height * 0.02),
-              OutcomePieAndStatistics(height: height, userId: userId),
+
+              // EXPENSE STATISTICS
+              OutcomePieAndStatistics(
+                height: height,
+              ),
+
               SizedBox(height: height * 0.02),
-              SmartAlert(width: width),
+
+              // SMART ALERT
+              SmartAlert(
+                width: width,
+              ),
             ],
           ),
         ),
