@@ -33,7 +33,6 @@ class _BudgetViewState extends State<BudgetView> {
         ? allTransactions
         : allTransactions.where((transaction) {
             final query = _searchQuery.toLowerCase();
-
             return transaction.category.toLowerCase().contains(query) ||
                 transaction.description.toLowerCase().contains(query);
           }).toList();

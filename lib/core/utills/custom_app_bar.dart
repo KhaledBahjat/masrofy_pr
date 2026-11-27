@@ -1,5 +1,3 @@
-
-
 import 'package:masrofy/core/utills/back_button.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -15,7 +13,6 @@ class CustomAppBar extends StatelessWidget {
         children: [
           SizedBox(height: 15),
           Row(
-       
             children: [
               Backbutton(width: width),
               SizedBox(width: 10),
