@@ -139,6 +139,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_pinput:
+    dependency: "direct main"
+    description:
+      name: flutter_pinput
+      sha256: a25346d302722da0220f5e54ed753c65b4e0c895951db8269262cc4d5f1b38d6
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

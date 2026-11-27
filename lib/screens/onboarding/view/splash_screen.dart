@@ -15,53 +15,46 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    
     Future.delayed(const Duration(seconds: 3), () {
       GoRouter.of(context).pushReplacement(AppRoutes.kOnBoardingView);
     });
   }
 
   @override
-
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Center(
-        child: SingleChildScrollView(
-          
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: height * 0.25),
-              Image.asset(
-                'assets/images/logo.png',
-                width: width * 0.6,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: height * 0.25),
+            Image.asset(
+              'assets/images/logo.png',
+              width: width * 0.6,
+            ),
+            SizedBox(height: height * 0.12),
+            Text(
+              'Masrofy',
+              style: TextStyle(
+                fontFamily: kPrimaryFont,
+                fontSize: width * 0.09, 
+                fontWeight: FontWeight.w500,
               ),
-              SizedBox(height: height * 0.12),
-              Text(
-                'Masrofy',
-                style: TextStyle(
-                  fontFamily: kPrimaryFont,
-                  fontSize: width * 0.09, 
-                  fontWeight: FontWeight.w500,
-                ),
+            ),
+            SizedBox(height: height * 0.01),
+            Text(
+              'Version 1.0',
+              style: TextStyle(
+                fontFamily: kPrimaryFont,
+                fontSize: width * 0.04,
+                fontWeight: FontWeight.w300,
+                color: Colors.grey,
               ),
-              SizedBox(height: height * 0.01),
-              Text(
-                'Version 1.0',
-                style: TextStyle(
-                  fontFamily: kPrimaryFont,
-                  fontSize: width * 0.04,
-                  fontWeight: FontWeight.w300,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(height: height * 0.05),
-            ],
-          ),
+            ),
+            SizedBox(height: height * 0.05),
+          ],
         ),
       ),
     );

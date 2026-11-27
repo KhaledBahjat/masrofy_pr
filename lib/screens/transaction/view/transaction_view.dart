@@ -178,57 +178,23 @@ class _TransactionViewState extends State<TransactionView> {
             SizedBox(height: height * 0.03),
 
             // ---------------- AMOUNT + CURRENCY ----------------
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: TextField(
-                    controller: amountController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.black),
-                      labelText: "Amount",
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.black, width: 2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.black, width: 2),
-                      ),
-                    ),
-                  ),
+            TextField(
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.black),
+                labelText: "Amount",
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.black, width: 2),
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.black, width: 2),
-                      color: kPrimaryColor,
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: selectedCurrency,
-                        isExpanded: true,
-                        dropdownColor: kPrimaryColor,
-                        items: const [
-                          DropdownMenuItem(
-                            value: "Egyptian pound",
-                            child: Text("EGP"),
-                          ),
-                          DropdownMenuItem(value: "USD", child: Text("USD")),
-                          DropdownMenuItem(value: "EUR", child: Text("EUR")),
-                        ],
-                        onChanged: (v) => setState(() => selectedCurrency = v!),
-                      ),
-                    ),
-                  ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.black, width: 2),
                 ),
-              ],
+              ),
             ),
+            SizedBox(width: 10),
 
             SizedBox(height: height * 0.025),
 
@@ -285,7 +251,7 @@ class _TransactionViewState extends State<TransactionView> {
                 ),
                 DropdownMenuItem(value: "Car fuel", child: Text("Car fuel")),
               ],
-              onChanged: (value) => setState(() => selectedCategory = value!),
+            
             ),
 
             SizedBox(height: height * 0.025),

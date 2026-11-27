@@ -91,7 +91,7 @@ class _BudgetViewState extends State<BudgetView> {
             SizedBox(height: height * 0.015),
 
             // LIST OF TRANSACTIONS
-            if (filteredTransactions.isEmpty)
+            if (allTransactions.isEmpty)
               Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: height * 0.06,
@@ -107,6 +107,7 @@ class _BudgetViewState extends State<BudgetView> {
                 ),
               )
             else
+            
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

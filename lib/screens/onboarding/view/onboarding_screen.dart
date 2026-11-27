@@ -50,7 +50,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _finishOnboarding() {
-    GoRouter.of(context).pushReplacement(AppRoutes.kWelcomeView);
+    GoRouter.of(context).pushReplacement(AppRoutes.kHomeView);
   }
 
   @override

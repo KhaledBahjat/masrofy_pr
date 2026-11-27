@@ -47,10 +47,7 @@ class HomeView extends StatelessWidget {
                         children: [
                           const Text(
                             "Welcome back!",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                            ),
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Text(
                             user.displayName,
@@ -65,12 +62,8 @@ class HomeView extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    onPressed: () =>
-                        context.push(AppRoutes.kNotificationView),
-                    icon: const Icon(
-                      Icons.notifications,
-                      color: Colors.grey,
-                    ),
+                    onPressed: () => context.push(AppRoutes.kNotificationView),
+                    icon: const Icon(Icons.notifications, color: Colors.grey),
                   ),
                 ],
               ),
@@ -93,14 +86,11 @@ class HomeView extends StatelessWidget {
                   children: [
                     const Text(
                       "Total Balance",
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 13,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      "£${balance.toStringAsFixed(2)}",
+                      "${balance.toStringAsFixed(2)} EGP",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -108,7 +98,7 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "From: £${totalIncome.toStringAsFixed(2)}",
+                      "From: ${totalIncome.toStringAsFixed(2)} EGP",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 11,
@@ -134,10 +124,7 @@ class HomeView extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.black,
                   border: const Border(
-                    right: BorderSide(
-                      color: kGreyFontColor,
-                      width: 4,
-                    ),
+                    right: BorderSide(color: kGreyFontColor, width: 4),
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -175,9 +162,7 @@ class HomeView extends StatelessWidget {
               SizedBox(height: height * 0.02),
 
               /// ---------------------- PIE CHART ----------------------
-              OutcomePieAndStatistics(
-                height: height,
-              ),
+              OutcomePieAndStatistics(height: height),
             ],
           ),
         ),
@@ -203,10 +188,7 @@ class HomeView extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-              ),
+              style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
             Text(
               value,

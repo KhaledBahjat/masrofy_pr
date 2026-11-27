@@ -35,9 +35,9 @@ class MockData {
 
   static const MockUser currentUser = MockUser(
     uid: 'demo-user-001',
-    displayName: 'Ahmed Khaled',
+    displayName: 'خالد رقم واحد',
     email: 'ahmed.khaled@masrofy.app',
-    avatarAsset: 'assets/images/profile.png',
+    avatarAsset: 'assets/images/profile.jpeg',
   );
 
   // ================= BALANCE =================
@@ -49,45 +49,23 @@ class MockData {
   // ================= INCOME STATISTICS =================
 
   static const List<MockCategoryStatistic> incomeStatistics = [
-    MockCategoryStatistic(
-      category: 'Monthly income',
-      percentage: 75,
-    ),
-    MockCategoryStatistic(
-      category: 'Extra Work',
-      percentage: 25,
-    ),
+    MockCategoryStatistic(category: 'Monthly income', percentage: 75),
+    MockCategoryStatistic(category: 'Extra Work', percentage: 25),
   ];
 
   // ================= EXPENSE STATISTICS =================
 
   static const List<MockCategoryStatistic> outcomeStatistics = [
-    MockCategoryStatistic(
-      category: 'Electronics',
-      percentage: 38.2,
-    ),
-    MockCategoryStatistic(
-      category: 'Supermarket purchases',
-      percentage: 25.5,
-    ),
-    MockCategoryStatistic(
-      category: 'Installments',
-      percentage: 18.2,
-    ),
-    MockCategoryStatistic(
-      category: 'Restaurant lunch',
-      percentage: 10.9,
-    ),
-    MockCategoryStatistic(
-      category: 'Car fuel',
-      percentage: 7.2,
-    ),
+    MockCategoryStatistic(category: 'Electronics', percentage: 38.2),
+    MockCategoryStatistic(category: 'Supermarket purchases', percentage: 25.5),
+    MockCategoryStatistic(category: 'Installments', percentage: 18.2),
+    MockCategoryStatistic(category: 'Restaurant lunch', percentage: 10.9),
+    MockCategoryStatistic(category: 'Car fuel', percentage: 7.2),
   ];
 
   // ================= TRANSACTIONS =================
 
-  static final List<TransactionModel> transactions =
-      List.unmodifiable([
+  static final List<TransactionModel> transactions = List.unmodifiable([
     TransactionModel(
       id: 'tx-1',
       userId: currentUser.uid,

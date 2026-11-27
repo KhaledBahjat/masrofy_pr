@@ -74,16 +74,6 @@ class _PhoneViewState extends State<PhoneView> {
                       ),
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your phone number';
-                    } else if (!value.startsWith('+20')) {
-                      return 'Phone number must start with +20';
-                    } else if (value.length < 13) {
-                      return 'Phone number seems too short';
-                    }
-                    return null;
-                  },
                 ),
 
                 SizedBox(height: height * 0.05),
