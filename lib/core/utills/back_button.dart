@@ -16,7 +16,7 @@ class Backbutton extends StatelessWidget {
       height: width * 0.1,
       child: IconButton(
         onPressed: () {
-          (context).go(AppRoutes.kHomeView);
+          (context).go(AppRoutes.kRootView);
         },
         icon: const Icon(Icons.arrow_back_ios_new, size: 16),
       ),

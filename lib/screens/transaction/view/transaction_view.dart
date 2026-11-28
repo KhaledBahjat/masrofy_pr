@@ -395,7 +395,7 @@ class _TransactionViewState extends State<TransactionView> {
                 // Cancele Button
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => (context).go(AppRoutes.kHomeView),
+                    onPressed: () => (context).go(AppRoutes.kRootView),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),

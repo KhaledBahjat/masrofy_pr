@@ -1,10 +1,15 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/constants.dart';
-import 'package:masrofy/core/routes.dart';
 
 class CustomBottomNav extends StatelessWidget {
-  const CustomBottomNav({super.key});
+  const CustomBottomNav({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  final int currentIndex;
+  final ValueChanged<int> onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,62 +32,37 @@ class CustomBottomNav extends StatelessWidget {
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
           ),
-          child: Builder(
-            builder: (context) {
-              final String location = GoRouterState.of(context).uri.toString();
-              int selectedIndex = 0;
-              if (location.startsWith(AppRoutes.kReportsView)) {
-                selectedIndex = 1;
-              }
-              if (location.startsWith(AppRoutes.kTransactionView)) {
-                selectedIndex = 2;
-              }
-              if (location.startsWith(AppRoutes.kBudgetView)) {
-                selectedIndex = 3;
-              }
-              if (location.startsWith(AppRoutes.kProfileView)) selectedIndex = 4;
-
-              return BottomNavigationBar(
-                currentIndex: selectedIndex,
-                onTap: (index) {
-                  switch (index) {
-                    case 0:
-                      (context).go(AppRoutes.kHomeView);
-                      break;
-                    case 1:
-                      (context).go(AppRoutes.kReportsView);
-                      break;
-                    case 2:
-                      (context).go(AppRoutes.kTransactionView);
-                      break;
-                    case 3:
-                      (context).go(AppRoutes.kBudgetView);
-                      break;
-                    case 4:
-                      (context).go(AppRoutes.kProfileView);
-                      break;
-                  }
-                },
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                items: [
-                  NavigationItem(Icons.house, selectedIndex == 0),
-                  NavigationItem(Icons.show_chart_rounded, selectedIndex == 1),
-                  CenterItem(selectedIndex == 2),
-                  NavigationItem(Icons.list_rounded, selectedIndex == 3),
-                  NavigationItem(Icons.person, selectedIndex == 4),
-                ],
-              );
-            },
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: onTap,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: kPrimaryColor,
+            elevation: 0,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items: [
+              NavigationItem(Icons.house, currentIndex == 0),
+              NavigationItem(
+                Icons.show_chart_rounded,
+                currentIndex == 1,
+              ),
+              CenterItem(currentIndex == 2),
+              NavigationItem(
+                Icons.list_rounded,
+                currentIndex == 3,
+              ),
+              NavigationItem(
+                Icons.person,
+                currentIndex == 4,
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
 BottomNavigationBarItem CenterItem(bool isSelected) {
   return BottomNavigationBarItem(
     icon: Container(
@@ -99,9 +79,14 @@ BottomNavigationBarItem CenterItem(bool isSelected) {
         size: 22,
       ),
     ),
-    label: "",
+    label: '',
   );
-}BottomNavigationBarItem NavigationItem(IconData icon, bool isSelected) {
+}
+
+BottomNavigationBarItem NavigationItem(
+  IconData icon,
+  bool isSelected,
+) {
   return BottomNavigationBarItem(
     icon: Container(
       width: 38,
@@ -116,6 +101,6 @@ BottomNavigationBarItem CenterItem(bool isSelected) {
         color: isSelected ? Colors.black : Colors.grey,
       ),
     ),
-    label: "",
+    label: '',
   );
 }

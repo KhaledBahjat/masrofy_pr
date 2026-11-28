@@ -30,7 +30,7 @@ class _VerifyPhoneViewState extends State<VerifyPhoneView> {
       return;
     }
 
-    context.go(AppRoutes.kHomeView);
+    context.go(AppRoutes.kRootView);
   }
 
   void _sendAgain() {
