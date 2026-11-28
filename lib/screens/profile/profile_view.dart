@@ -130,7 +130,7 @@ class ProfileView extends StatelessWidget {
               color: Colors.redAccent,
               iconColor: Colors.redAccent,
               onTap: () {
-                GoRouter.of(context).pushReplacement(AppRoutes.kWelcomeView);
+                GoRouter.of(context).pushReplacement(AppRoutes.kSplashView);
               },
             ),
           ],
