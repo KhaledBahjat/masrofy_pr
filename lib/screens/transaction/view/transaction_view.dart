@@ -21,56 +21,6 @@ class _TransactionViewState extends State<TransactionView> {
   String selectedRepetition = "One time";
   DateTime? selectedDate;
 
-  // void _saveTransaction() {
-  //   final amount = double.tryParse(amountController.text.trim());
-  //   if (amount == null || amount <= 0) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Please enter a valid amount'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //     return;
-  //   }
-  //   if (selectedCategory == "Select category") {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Please select a category'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //     return;
-  //   }
-  //   if (selectedDate == null) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Please choose a date'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //     return;
-  //   }
-
-  //   MockStore.instance.addTransaction(
-  //     amount: amount,
-  //     description: descriptionController.text.trim(),
-  //     category: selectedCategory,
-  //     currency: selectedCurrency,
-  //     transactionType: transactionType,
-  //     repetition: selectedRepetition,
-  //     date: selectedDate!,
-  //   );
-
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     const SnackBar(
-  //       content: Text('Transaction added successfully!'),
-  //       backgroundColor: Colors.green,
-  //     ),
-  //   );
-  //   amountController.clear();
-  //   descriptionController.clear();
-  // }
-
   @override
   void dispose() {
     amountController.dispose();
@@ -194,7 +144,6 @@ class _TransactionViewState extends State<TransactionView> {
                 ),
               ),
             ),
-            SizedBox(width: 10),
 
             SizedBox(height: height * 0.025),
 
@@ -203,12 +152,15 @@ class _TransactionViewState extends State<TransactionView> {
               initialValue: selectedCategory,
               dropdownColor: kPrimaryColor,
               style: const TextStyle(color: Colors.black),
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    selectedCategory = value;
+                  });
+                }
+              },
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.black, width: 2),
-                ),
-                focusedBorder: OutlineInputBorder(
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: Colors.black, width: 2),
                 ),
@@ -251,7 +203,6 @@ class _TransactionViewState extends State<TransactionView> {
                 ),
                 DropdownMenuItem(value: "Car fuel", child: Text("Car fuel")),
               ],
-            
             ),
 
             SizedBox(height: height * 0.025),
